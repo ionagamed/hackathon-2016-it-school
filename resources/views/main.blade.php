@@ -24,17 +24,36 @@
       Информация
     </div>
     <div class='panel-body'>
-      <div class='row'>
-        <form id='form'>
+      <form id='form'>
+        <div class='row'>
           <div class='col-md-4'>
             <div class='input-group'>
               <label class='input-group-addon ' for='login'>
                 Логин
               </label>
-              <input class='form-control' type='text' name='search' id='search' value='{{ old("search") }}'>
+              <input class='form-control' type='text' name='login' id='login' value='{{ old("login") }}'>
             </div>
           </div>
-          <div class='col-md-6'>
+          <div class='col-md-4'>
+            <div class='input-group'>
+              <label class='input-group-addon ' for='mac'>
+                MAC-адрес
+              </label>
+              <input class='form-control' type='text' name='mac' id='mac' value='{{ old("mac") }}'>
+            </div>
+          </div>
+          <div class='col-md-4'>
+            <div class='input-group'>
+              <label class='input-group-addon ' for='ip'>
+                IP-адрес
+              </label>
+              <input class='form-control' type='text' name='ip' id='ip' value='{{ old("ip") }}'>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class='row'>
+          <div class='col-md-10'>
             <div class='input-group'>
               <label class='input-group-addon'>
                 от
@@ -54,8 +73,8 @@
               Фильтр
             </button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
       <hr>
       @if(!$users->isEmpty())
       <table class='table'>
@@ -99,8 +118,8 @@
   $("#to").on("dp.change", function() {
     $("#ts_end")[0].value = $(this).data("DateTimePicker").date().format("YYYY-MM-DD HH:mm:ss");
   });
-  $("#from")[0].value = moment('{{ old("ts_begin") }}').format("DD.MM.YYYY HH:mm");
-  $("#to")[0].value = moment('{{ old("ts_end") }}').format("DD.MM.YYYY HH:mm");
+  $("#from")[0].value = moment('{{ old("ts_begin") or '01.01.1970 00:00' }}').format("DD.MM.YYYY HH:mm");
+  $("#to")[0].value = moment('{{ old("ts_end") or '01.01.2070 00:00' }}').format("DD.MM.YYYY HH:mm");
   $(".df").each(function () {
     $(this).html(moment($(this).html()).format("DD.MM.YYYY HH:mm"));
   });

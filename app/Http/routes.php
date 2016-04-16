@@ -24,7 +24,10 @@ Route::get('/', function (Request $request) {
     } else {
         $ts_begin = $request->input("ts_begin");
     }
-    $users = \App\User::where("login", "LIKE", "%".$request->input("search")."%")
+    $users = \App\User
+        ::where("login", "LIKE", "%".$request->input("login")."%")
+        ->where("mac", "LIKE", "%".$request->input("mac")."%")
+        ->where("ip", "LIKE", "%".$request->input("ip")."%")
         ->where("ts_begin", "<=", $ts_end)
         ->where("ts_end", ">=", $ts_begin)
         ->paginate(10);
